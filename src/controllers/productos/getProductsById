@@ -5,7 +5,7 @@ const getProductsById = async (req, res) => {
           const obtenerUsuarioID = async () =>{
           const { id } = req.params
           console.log(id)
-          const consulta = 'SELECT * FROM productos where id_vendedor =  $1' 
+            const consulta = 'SELECT * FROM productos inner join vendedor on productos.id_producto = vendedor.id_producto where vendedor.id_vendedor =  $1' 
           const values = [id]
           const {rows} = await pool.query(consulta, values)
           console.log(rows)

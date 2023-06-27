@@ -668,15 +668,15 @@ components:
         apellido_paterno:
           type: string
           description: Apellido paterno del usuario
-          example: 'Cruz'
+          example: 'Torres'
         apellido_materno:
           type: string
           description: Apellido materno del usuario
-          example: 'Bonilla'
+          example: 'Mora'
         celular:
           type: string
           description: Número de celular del usuario
-          example: '+56987654321'
+          example: '+56912345678'
         contrasena:
           type: string
           description: Contraseña del usuario
@@ -684,12 +684,12 @@ components:
         rut:
           type: string
           description: RUT del usuario
-          example: '98765432-1'
+          example: '15911702-2'
         correo:
           type: string
           format: email
           description: Correo electrónico del usuario
-          example: 'felipe@dl-store.cl'
+          example: 'felipe@MotoMarket.cl'
         sexo:
           type: string
           enum: [Masculino, Femenino, Otro]
@@ -702,15 +702,15 @@ components:
         region:
           type: string
           description: Ciudad del usuario
-          example: 'Valparaíso'
+          example: 'Calama'
         ciudad:
           type: string
           description: Región del usuario
-          example: 'Valparaíso'
+          example: 'Calama'
         comuna:
           type: string
           description: Comuna del usuario
-          example: 'Valparaíso'
+          example: 'Calama'
         numero:
           type: integer
           format: int64
@@ -746,15 +746,15 @@ components:
         apellido_paterno:
           type: string
           description: Apellido paterno del usuario
-          example: 'Cruz'
+          example: 'Torres'
         apellido_materno:
           type: string
           description: Apellido materno del usuario
-          example: 'Bonilla'
+          example: 'Mora'
         celular:
           type: string
           description: Número de celular del usuario
-          example: '+56987654321'
+          example: '+56912345678'
         contrasena:
           type: string
           description: Contraseña del usuario
@@ -767,7 +767,7 @@ components:
           type: string
           format: email
           description: Correo electrónico del usuario
-          example: 'felipe@dl-store.cl'
+          example: 'felipe@MotoMarket.cl'
         sexo:
           type: string
           enum: [Masculino, Femenino, Otro]
@@ -948,7 +948,7 @@ components:
           type: string
           format: email
           description: Correo electrónico del usuario
-          example: 'felipe@dl-store.cl'
+          example: 'felipe@MotoMarket.cl'
         contrasena:
           type: string
           description: Contraseña del usuario
@@ -973,11 +973,11 @@ components:
           type: string
           format: email
           description: Correo electrónico del usuario
-          example: 'felipe@dl-store.cl'
+          example: 'felipe@MotoMarket.cl'
         contrasena:
           type: string
           description: Contraseña del usuario
-          example: 'PasswordExample123'
+          example: 'PasswordMoto'
     LoginSellerResponse:
       type: object
       properties:

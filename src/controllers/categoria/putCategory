@@ -1,0 +1,27 @@
+const pool = require('../../utils/dbConector.js');
+
+const putCategory = async (req, res) => {
+
+        try {
+            const actualizarCategoria = async () =>{
+                  const { nombre, descripcion, id } = req.body 
+                  const consulta = 'UPDATE categorias SET nombre=$1, descripcion=$2 WHERE id_categoria=$3' 
+                  console.log(nombre)
+                  console.log(id)
+                  const values = [ nombre, descripcion, id ]
+                  const {rowCount} = await pool.query( consulta, values)
+                  return rowCount
+            }
+
+            const result = await actualizarCategoria()
+            const resp = {}
+            if (result === 1) {   resp = {"statusCode": 200, "message":'Categoria '+nombre+'  fue actualizada'} }
+            if (result === 0) {  resp = {"statusCode": 400, "message":'Categoria '+nombre+'  fue actualizada'}}
+            return res.status(resp.statusCode).send(resp.message);
+       } catch (error) {
+           console.log(error.message);
+         return res.status(500).send(error.message);
+       }
+}
+
+module.exports = putCategory;

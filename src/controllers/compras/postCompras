@@ -1,0 +1,26 @@
+const pool = require('../../utils/dbConector.js');
+
+const postCompras = async (req, res) => {
+      try {
+          
+        const insertProducts = async () =>{
+          const { productos, direccion, id_usuario } = req.body 
+          const consulta = 'insert into compras values(default , $1, $2 ,$3 ,$4)'
+          const fecha= new Date(); 
+          const values = [ productos, fecha,  direccion, id_usuario]
+          const  { rowCount }= await pool.query( consulta, values)
+          return rowCount
+        }    
+
+        const result = await insertProducts()
+        const resp = {};
+        if (result === 1) { resp.message = "Producto Creado"; }
+        if (result === 0) { resp.message = "Producto no Creado"; }
+        console.log(resp);
+        res.json(resp);
+      } catch (error) {
+          console.log(error.message);
+          return res.status(500).send(error.message);
+      }
+}
+module.exports = postCompras;

@@ -1,0 +1,30 @@
+const pool = require("../../utils/dbConector.js");
+
+const postCategory = async (req, res) => {
+  try {
+    const insertCategoria = async () => {
+      const { nombre, descripcion } = req.body;
+      const consulta = "INSERT INTO categorias values(default , $1, $2)";
+      const values = [ nombre, descripcion ];
+      const { rowCount } = await pool.query(consulta, values);
+      console.log(rowCount);
+      return rowCount;
+    };
+
+    const result = await insertCategoria();
+    const resp = {};
+    if (result === 1) {
+      resp = {"statusCode": 200, "message":'Categoria Creada '+nombre+''}
+    }
+    if (result === 0) {
+      resp = {"statusCode": 200, "message":'Categoria no Creada '+nombre+''}
+      resp.message = "Categoria no Creada";
+    }
+    return res.status(resp.statusCode).send(resp.message);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send(error.message);
+  }
+};
+
+module.exports = postCategory;

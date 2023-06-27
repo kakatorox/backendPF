@@ -1,0 +1,31 @@
+const pool = require('../../utils/dbConector.js');
+
+const putProducts = async (req, res) => {
+
+         try {
+            const actualizarProducto = async () =>{
+                  const { nombre, descripcion, img, precio, stock, estado, fecha_ingreso, marca, id_vendedor, id_categoria, id} = req.body 
+                  const values = [ nombre, descripcion, img, precio, stock, estado, fecha_ingreso, marca, id_vendedor, id_categoria, id]  
+                 console.log(values)
+                  const consulta = "UPDATE productos SET nombre=$1, descripcion=$2, img=$3, precio=$4, stock=$5, estado=$6, fecha_ingreso=$7, marca=$8, id_vendedor=$9, id_categoria=$10 WHERE id_producto=$11"
+                  const { rowCount } = await pool.query(consulta, values)
+                  console.log(rowCount) 
+                  console.log('actualizo')
+                  return rowCount
+            }
+            const result = await actualizarProducto()
+            const resp = {}
+            if (result === 1) { resp.message = "Producto modificado" }
+            if (result === 0) { resp.message = "Producto no modificado" }
+            console.log(resp)
+            res.json(resp)
+    
+      
+   
+        } catch (error) {
+           console.log(error.message);
+         return res.status(500).send(error.message);
+      }
+}
+
+module.exports = putProducts;

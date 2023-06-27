@@ -1,0 +1,23 @@
+const pool = require('../../utils/dbConector.js');
+
+const getProductsBySearch = async (req, res) => {
+       try {
+          const buscar = async () =>{
+          const { search } = req.params
+          console.log(search)
+          const consulta = "SELECT * FROM productos where nombre like '%' || $1 || '%'" 
+          const values = [search]
+          const {rows} = await pool.query(consulta, values)
+          console.log(rows)
+          return rows
+        }    
+        const result = await buscar()
+        res.json(result)
+       
+       } catch (error) {
+           console.log(error.message);
+          return res.status(500).send(error.message);
+      }
+}
+
+module.exports = getProductsBySearch;

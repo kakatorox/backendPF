@@ -1,0 +1,31 @@
+const pool = require("../../utils/dbConector.js");
+
+const postAddress = async (req, res) => {
+  try {
+    const insertDireccion = async () => {
+      const { region, ciudad, comuna, calle, numero, descripcion, id_usuario } =
+        req.body;
+      const consulta = "INSERT INTO direccion  values(default , $1, $2 ,$3 ,$4 ,$5 ,$6, $7)";
+      const values = [region, ciudad, comuna, calle, numero, descripcion, id_usuario];
+      const { rowCount } = await pool.query(consulta, values);
+      console.log(rowCount);
+      return rowCount;
+    };
+
+    const result = await insertDireccion();
+    const resp = {};
+    if (result === 1) {
+      resp.message = "Dirección Creada";
+    }
+    if (result === 0) {
+      resp.message = "Direccion no Creada";
+    }
+    console.log(resp);
+    res.json(resp);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send(error.message);
+  }
+};
+
+module.exports = postAddress;

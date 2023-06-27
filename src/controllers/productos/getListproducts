@@ -1,0 +1,19 @@
+const pool = require('../../utils/dbConector.js');
+
+const getListproducts = async (req, res) => {
+    try {
+        const listadoProductos = async () =>{
+            const {rows} = await pool.query("SELECT * FROM productos")
+            console.log(rows)
+
+            return rows
+        }    
+        const result = await listadoProductos()
+        res.json(result)   
+    } catch (error) {
+          console.log(error.message);
+         return res.status(500).send(error.message);
+    }
+}
+
+module.exports = getListproducts;

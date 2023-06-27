@@ -1,0 +1,32 @@
+const pool = require('../../utils/dbConector.js');
+const bcrypt = require('bcryptjs');
+
+const putSeller = async (req, res) => {
+
+        try {
+            const actualizarSeller = async () =>{
+                  const { rut, nombre, apellido_paterno, apellido_materno, telefono, correo, region, ciudad, comuna, calle, numero, contrasena, id} = req.body 
+                  const passwordEncriptada = bcrypt.hashSync(contrasena);
+                  const values = [rut, nombre, apellido_paterno, apellido_materno, telefono, correo, region, ciudad, comuna, calle, numero, passwordEncriptada, id]  
+                  const consulta = "UPDATE vendedor SET rut=$1, nombre=$2, apellido_paterno=$3, apellido_materno=$4, telefono=$5, correo=$6, region=$7, ciudad=$8, comuna=$9, calle=$10, numero=$11, contrasena=$12 WHERE id_vendedor=$13"
+                  const { rowCount } = await pool.query(consulta, values)
+                  console.log(rowCount) 
+                  console.log('actualizo')
+                  return rowCount
+            }
+            const result = await actualizarSeller()
+            const resp = {}
+            if (result === 1) { resp.message = "Seller modificado" }
+            if (result === 0) { resp.message = "Seller no modificado" }
+            console.log(resp)
+            res.json(resp)
+    
+      
+   
+       } catch (error) {
+           console.log(error.message);
+         return res.status(500).send(error.message);
+       }
+}
+
+module.exports = putSeller;

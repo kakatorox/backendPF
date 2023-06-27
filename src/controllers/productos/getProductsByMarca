@@ -1,0 +1,30 @@
+const pool = require('../../utils/dbConector.js');
+
+const getProductsById = async (req, res) => {
+      try {
+          const obtenerUsuarioID = async () =>{
+          const { marca } = req.params
+          console.log(marca)
+          const consulta = 'SELECT * FROM productos where marca =  $1' 
+          const values = [marca]
+          const {rows} = await pool.query(consulta, values)
+          console.log(rows)
+          return rows
+        }    
+        const result = await obtenerUsuarioID()
+      
+        if(result.length == 0 ){
+          console.log("asd")
+          const resp = {}
+          resp.message = "Marca no encontrada"
+          res.json(resp)
+        }else{
+           res.json(result)
+        }
+      } catch (error) {
+          console.log(error.message);
+         return res.status(500).send(error.message);
+      }
+}
+
+module.exports = getProductsById;

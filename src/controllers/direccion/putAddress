@@ -1,0 +1,26 @@
+const pool = require('../../utils/dbConector.js');
+
+const putAddress = async (req, res) => {
+
+        try {
+            const actualizarDireccion = async () =>{
+                  const {region, ciudad, comuna, calle, numero, descripcion, id_direccion, id_usuario} = req.body 
+                  const consulta = 'UPDATE public.direccion SET region=$1, comuna=$2, calle=$3, numero=$4, descripcion=$5 WHERE id_direccion=$6 and id_usuario=$7' 
+                  const values = [region, ciudad, comuna, calle, numero, descripcion, id_direccion, id_usuario]
+                  const {rowCount} = await pool.query( consulta, values)
+                  return rowCount
+            }
+
+            const result = await actualizarDireccion()
+            const resp = {}
+            if (result === 1) { resp.message = "Dirección Modificado" }
+            if (result === 0) { resp.message = "Direccion no modificado" }
+            console.log(resp)
+            res.json(resp) 
+       } catch (error) {
+           console.log(error.message);
+         return res.status(500).send(error.message);
+       }
+}
+
+module.exports = putAddress;

@@ -5,7 +5,7 @@ const putCategory = async (req, res) => {
         try {
             const actualizarCategoria = async () =>{
                   const { nombre, descripcion, id } = req.body 
-              const consulta = 'UPDATE categoria SET nombre=$1, descripcion=$2 WHERE id_categoria=$3' 
+                  const consulta = 'UPDATE categorias SET nombre=$1, descripcion=$2 WHERE id_categoria=$3' 
                   console.log(nombre)
                   console.log(id)
                   const values = [ nombre, descripcion, id ]

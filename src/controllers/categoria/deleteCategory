@@ -5,7 +5,7 @@ const deleteCategory = async (req, res) => {
         try {
             const deleteCategoria = async () =>{
                   const { id } = req.body 
-              const consulta = 'DELETE FROM categoria WHERE id_categoria=$1' 
+                  const consulta = 'DELETE FROM categorias WHERE id_categoria=$1' 
                   const values = [ id ]
                   const {rowCount} = await pool.query( consulta, values)
                   return rowCount

@@ -370,7 +370,7 @@ paths:
           description: Compra eliminada exitosamente
         '404':
           description: No se encontró la compra solicitada
-  /categoria:
+  /categorias:
     get:
       summary: Obtener todas las categorías
       tags:
@@ -383,7 +383,7 @@ paths:
               schema:
                 type: array
                 items:
-                 $ref: '#/components/schemas/categoria'
+                 $ref: '#/components/schemas/categorias'
     post:
       summary: Crear una nueva categoría
       tags:
@@ -393,11 +393,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/categoria'
+              $ref: '#/components/schemas/categorias'
       responses:
         '201':
           description: Created
-  /categoria/{id_categoria}:
+  /categorias/{id_categoria}:
     get:
       summary: Obtener una categoría por su ID
       tags:
@@ -857,7 +857,7 @@ components:
         - fecha
         - direccion
         - id_usuario
-    categoria:
+    categorias:
       type: object
       properties:
         id_categoria:

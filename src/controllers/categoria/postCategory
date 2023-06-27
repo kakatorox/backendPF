@@ -4,7 +4,7 @@ const postCategory = async (req, res) => {
   try {
     const insertCategoria = async () => {
       const { nombre, descripcion } = req.body;
-      const consulta = "INSERT INTO categoria values(default , $1, $2)";
+      const consulta = "INSERT INTO categorias values(default , $1, $2)";
       const values = [ nombre, descripcion ];
       const { rowCount } = await pool.query(consulta, values);
       console.log(rowCount);

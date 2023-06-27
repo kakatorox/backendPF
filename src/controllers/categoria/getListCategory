@@ -2,12 +2,12 @@ const pool = require('../../utils/dbConector.js');
 
 const getListCategory = async (req, res) => {
     try {
-        const listadoCategoria = async () =>{
-            const {rows} = await pool.query("SELECT * FROM categoria")
+        const listadoCategorias = async () =>{
+            const {rows} = await pool.query("SELECT * FROM categorias")
             console.log(rows)
             return rows
         }    
-        const result = await listadoCategoria()
+        const result = await listadoCategorias()
         res.json(result)   
     } catch (error) {
           console.log(error.message);

@@ -5,31 +5,24 @@ const cors = require('cors');
 const helmet = require('helmet');
 
 const app = express()
+const port = process.env.PORT || 8080;
 
+const whitelist = ["http://localhost:3000", "http://127.0.0.1:3000","https://frontpf2.onrender.com"];
 
-app.use(cors());
+const corsOptions = {
+    origin: function (origin, callback){
+            if(whitelist.indexOf(origin) !== -1 || !origin){
+                callback(null, true);
+            } else {
+                callback(new error("no permitido por CORS"))
+            }
+        }
+};
+
+app.use(cors(corsOptions));
 app.use(helmet());
+
 app.use(express.json());
 app.use(routes);
 
-// const whitelist = ["http://localhost:3000", "http://127.0.0.1:3000","https://master--elegant-cassata-382c2f.netlify.app/"];
-
-// const corsOptions = {
-//     origin: function (origin, callback){
-//             if(whitelist.indexOf(origin) !== -1 || !origin){
-//                 callback(null, true);
-//             } else {
-//                 callback(new error("no permitido por CORS"))
-//             }
-//         }
-// };
-
-// app.use(cors(corsOptions));
-// app.use(cors());
-// app.options('*', cors(corsOptions));
-// app.use(helmet());
-
-// app.use(express.json());
-// app.use(routes);
-
-// app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));

@@ -6,7 +6,7 @@ const helmet = require('helmet');
 const app = express();
 const port = process.env.PORT || 8080;
 
-const whitelist = ["http://localhost:3000", "http://127.0.0.1:3000", "https://frontpf2.onrender.com"];
+const whitelist = ["http://localhost:3000", "http://127.0.0.1:3000", "https://frontpf2.onrender.com","https://front-pf-dusky.vercel.app/"];
 
 const corsOptions = {
     origin: function (origin, callback) {
